@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-12-11T02:52:23.609023Z",
+  "totalModules": 3,
+  "validModules": 3,
+  "invalidModules": 0,
+  "warningsCount": 2,
+  "errors": [],
+  "warnings": [
+    {
+      "module": "legacy-tls-library",
+      "file": "modules/data-in-transit/legacy-tls-library.yaml",
+      "message": "Certificate #2345 is HISTORICAL. Document in POA&M and plan for replacement per FedRAMP policy."
+    },
+    {
+      "module": "legacy-tls-library",
+      "file": "modules/data-in-transit/legacy-tls-library.yaml",
+      "message": "FIPS 140-2 modules will not be acceptable after September 21, 2026. Consider planning migration to FIPS 140-3."
+    }
+  ],
+  "results": [
+    {
+      "module": "aws-kms-hsm",
+      "file": "modules/data-at-rest/aws-kms.yaml",
+      "valid": true,
+      "certificateNumber": 4523,
+      "cmvpStatus": "Active",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "module": "legacy-tls-library",
+      "file": "modules/data-in-transit/legacy-tls-library.yaml",
+      "valid": true,
+      "certificateNumber": 2345,
+      "cmvpStatus": "Historical",
+      "errors": [],
+      "warnings": [
+        "Certificate #2345 is HISTORICAL. Document in POA&M and plan for replacement per FedRAMP policy.",
+        "FIPS 140-2 modules will not be acceptable after September 21, 2026. Consider planning migration to FIPS 140-3."
+      ]
+    },
+    {
+      "module": "openssl-fips-provider",
+      "file": "modules/data-in-transit/openssl-fips-provider.yaml",
+      "valid": true,
+      "certificateNumber": 4282,
+      "cmvpStatus": "Active",
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

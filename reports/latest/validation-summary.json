@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-12-11T02:52:23.609023Z",
+  "summary": {
+    "total": 3,
+    "compliant": 2,
+    "actionRequired": 1,
+    "nonCompliant": 0,
+    "warnings": 2
+  },
+  "modules": {
+    "compliant": [
+      {
+        "name": "aws-kms-hsm",
+        "certificateNumber": 4523,
+        "cmvpStatus": "Active",
+        "standard": "FIPS 140-3",
+        "dataClassification": [
+          "data-at-rest"
+        ],
+        "location": "AWS Cloud Infrastructure - Key Management",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "name": "openssl-fips-provider",
+        "certificateNumber": 4282,
+        "cmvpStatus": "Active",
+        "standard": "FIPS 140-3",
+        "dataClassification": [
+          "data-in-transit"
+        ],
+        "location": "Application Server - TLS Termination",
+        "errors": [],
+        "warnings": []
+      }
+    ],
+    "action_required": [
+      {
+        "name": "legacy-tls-library",
+        "certificateNumber": 2345,
+        "cmvpStatus": "Historical",
+        "standard": "FIPS 140-2",
+        "dataClassification": [
+          "data-in-transit"
+        ],
+        "location": "Legacy Application Server",
+        "errors": [],
+        "warnings": [
+          "Certificate #2345 is HISTORICAL. Document in POA&M and plan for replacement per FedRAMP policy.",
+          "FIPS 140-2 modules will not be acceptable after September 21, 2026. Consider planning migration to FIPS 140-3."
+        ]
+      }
+    ],
+    "non_compliant": []
+  }
+}
