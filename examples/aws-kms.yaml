@@ -1,0 +1,49 @@
+apiVersion: fedramp20x-poc/v1
+kind: CryptographicModule
+metadata:
+  name: aws-kms-hsm
+  uuid: 7a2c4d8f-3e91-4b56-a012-5c89d7e6f4a3
+  labels:
+    data-classification:
+      - DAR
+    environment: production
+    component: key-management
+  annotations:
+    ssp-reference: "SC-12, SC-13"
+
+spec:
+  module:
+    name: "AWS Key Management Service HSM"
+    vendor:
+      name: "Amazon Web Services"
+      url: "https://aws.amazon.com/kms/"
+    type: hardware
+    embodiment: multi-chip-standalone
+    description: "Hardware security module backing AWS KMS for key storage and cryptographic operations"
+
+  validation:
+    standard: "FIPS 140-3"
+    certificateNumber: 4523
+    securityLevel: 3
+    validationDate: "2024-03-15"
+    sunsetDate: "2029-03-15"
+    cmvpUrl: "https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4523"
+    algorithms:
+      - AES
+      - RSA
+      - ECDSA
+      - HMAC
+      - DRBG
+      - KDF
+
+  usage:
+    dataClassification:
+      - data-at-rest
+    location: "AWS Cloud Infrastructure - Key Management"
+    purpose: "Envelope encryption key management for data at rest"
+    inherited: true
+    inheritedFrom: "FR1234567890"
+
+status:
+  cmvpStatus: Active
+  complianceStatus: compliant

@@ -1,0 +1,29 @@
+apiVersion: fedramp20x-poc/v1
+kind: CryptographicModule
+metadata:
+  name: test-historical-module
+  uuid: cafebabe-cafe-babe-cafe-babecafebabe
+  labels:
+    data-classification:
+      - DIT
+    test: "true"
+spec:
+  module:
+    name: "Legacy TLS Library"
+    vendor:
+      name: "Legacy Systems Inc"
+    type: software
+    versions:
+      software: "2.1.0"
+  validation:
+    standard: "FIPS 140-2"
+    certificateNumber: 2345
+    securityLevel: 1
+    validationDate: "2018-01-20"
+  usage:
+    dataClassification:
+      - data-in-transit
+    location: "Old Application Server"
+    purpose: "TEST - This module should WARN (Historical certificate)"
+  portProtocolServiceRef:
+    - pps-test-001

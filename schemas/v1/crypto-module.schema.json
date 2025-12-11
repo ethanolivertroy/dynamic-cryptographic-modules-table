@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fedramp20x-poc/crypto-modules/schemas/v1/crypto-module.schema.json",
+  "title": "FedRAMP Cryptographic Module",
+  "description": "Schema for FedRAMP Appendix Q cryptographic module entries",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "fedramp20x-poc/v1",
+      "description": "API version for this resource"
+    },
+    "kind": {
+      "type": "string",
+      "const": "CryptographicModule",
+      "description": "Resource type"
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "spec": {
+      "$ref": "#/$defs/spec"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    }
+  },
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "required": ["name", "uuid"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Human-readable identifier (DNS subdomain format)"
+        },
+        "uuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for this entry"
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "data-classification": {
+              "type": "array",
+              "items": {
+                "enum": ["DIT", "DAR", "DIU"]
+              },
+              "description": "Data classification labels"
+            },
+            "environment": {
+              "type": "string",
+              "description": "Deployment environment"
+            },
+            "component": {
+              "type": "string",
+              "description": "System component using this module"
+            }
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Arbitrary metadata annotations"
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["module", "validation", "usage"],
+      "properties": {
+        "module": {
+          "$ref": "#/$defs/moduleInfo"
+        },
+        "validation": {
+          "$ref": "#/$defs/validationInfo"
+        },
+        "usage": {
+          "$ref": "#/$defs/usageInfo"
+        },
+        "portProtocolServiceRef": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Reference IDs to Ports/Protocols/Services table entries"
+        }
+      }
+    },
+    "moduleInfo": {
+      "type": "object",
+      "required": ["name", "vendor", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Official module name as registered with CMVP"
+        },
+        "vendor": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Vendor organization name"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Vendor website"
+            }
+          }
+        },
+        "type": {
+          "enum": ["software", "hardware", "firmware", "hybrid"],
+          "description": "Module type classification"
+        },
+        "embodiment": {
+          "enum": ["single-chip", "multi-chip-embedded", "multi-chip-standalone"],
+          "description": "Physical embodiment type"
+        },
+        "versions": {
+          "type": "object",
+          "properties": {
+            "software": {
+              "type": "string",
+              "description": "Software version"
+            },
+            "firmware": {
+              "type": "string",
+              "description": "Firmware version"
+            },
+            "hardware": {
+              "type": "string",
+              "description": "Hardware version"
+            }
+          },
+          "description": "Version information"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of module purpose"
+        }
+      }
+    },
+    "validationInfo": {
+      "type": "object",
+      "required": ["standard", "certificateNumber"],
+      "properties": {
+        "standard": {
+          "enum": ["FIPS 140-2", "FIPS 140-3"],
+          "description": "FIPS standard version"
+        },
+        "certificateNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "CMVP certificate number"
+        },
+        "securityLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Overall security level (1-4)"
+        },
+        "validationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Initial validation date"
+        },
+        "sunsetDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Module sunset/expiration date"
+        },
+        "cmvpUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to CMVP certificate page"
+        },
+        "securityPolicyUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to security policy document"
+        },
+        "algorithms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of validated algorithms"
+        },
+        "caveats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Validation caveats"
+        }
+      }
+    },
+    "usageInfo": {
+      "type": "object",
+      "required": ["dataClassification", "location"],
+      "properties": {
+        "dataClassification": {
+          "type": "array",
+          "items": {
+            "enum": ["data-in-transit", "data-at-rest", "data-in-use"]
+          },
+          "minItems": 1,
+          "description": "How this module protects data"
+        },
+        "location": {
+          "type": "string",
+          "description": "Where module is deployed (e.g., application server, database)"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Specific use case for this module"
+        },
+        "inherited": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether inherited from FedRAMP authorized service"
+        },
+        "inheritedFrom": {
+          "type": "string",
+          "description": "FedRAMP package ID if inherited"
+        }
+      },
+      "if": {
+        "properties": {
+          "inherited": {
+            "const": true
+          }
+        },
+        "required": ["inherited"]
+      },
+      "then": {
+        "required": ["inheritedFrom"]
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "cmvpStatus": {
+          "enum": ["Active", "Historical", "Revoked", "Unknown"],
+          "description": "Current status from CMVP"
+        },
+        "lastValidated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time status was verified against CMVP"
+        },
+        "complianceStatus": {
+          "enum": ["compliant", "action-required", "non-compliant"],
+          "description": "FedRAMP compliance status"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional status notes"
+        }
+      }
+    }
+  }
+}

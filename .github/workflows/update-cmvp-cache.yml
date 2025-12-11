@@ -1,0 +1,143 @@
+name: Update CMVP Cache
+
+on:
+  schedule:
+    # Run weekly on Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      start_cert:
+        description: 'Starting certificate number'
+        required: false
+        default: '4000'
+      end_cert:
+        description: 'Ending certificate number'
+        required: false
+        default: '5999'
+      rate_limit:
+        description: 'Requests per minute (be respectful to NIST)'
+        required: false
+        default: '30'
+
+permissions:
+  contents: write
+
+jobs:
+  update-cache:
+    name: Scrape CMVP Certificates
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Restore existing cache
+        uses: actions/cache@v4
+        with:
+          path: cmvp-cache/
+          key: cmvp-cache-${{ github.run_id }}
+          restore-keys: |
+            cmvp-cache-
+
+      - name: Run CMVP scraper
+        working-directory: tools/scraper
+        run: |
+          python cmvp_scraper.py \
+            --start ${{ github.event.inputs.start_cert || '4000' }} \
+            --end ${{ github.event.inputs.end_cert || '5999' }} \
+            --output ../../cmvp-cache/ \
+            --rate-limit ${{ github.event.inputs.rate_limit || '30' }}
+
+      - name: Save cache
+        uses: actions/cache/save@v4
+        with:
+          path: cmvp-cache/
+          key: cmvp-cache-${{ github.run_id }}
+
+      - name: Commit cache updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Update CMVP cache [skip ci]"
+          file_pattern: "cmvp-cache/**"
+
+  validate-after-update:
+    name: Re-validate Modules
+    runs-on: ubuntu-latest
+    needs: update-cache
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pull latest changes
+        run: git pull origin main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Validate modules with updated cache
+        run: |
+          python tools/validate.py \
+            --modules modules/ \
+            --schema schemas/v1/crypto-module.schema.json \
+            --cmvp-cache cmvp-cache/ \
+            --output validation-results.json \
+            --format text
+
+      - name: Check for newly invalid modules
+        id: check-invalid
+        run: |
+          INVALID=$(python -c "import json; d=json.load(open('validation-results.json')); print(d['invalidModules'])")
+          echo "invalid_count=$INVALID" >> $GITHUB_OUTPUT
+          if [ "$INVALID" -gt 0 ]; then
+            echo "::warning::Found $INVALID invalid module(s) after cache update"
+          fi
+
+      - name: Create issue for invalid modules
+        if: steps.check-invalid.outputs.invalid_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('validation-results.json', 'utf8'));
+
+            let body = '## Cryptographic Module Validation Alert\n\n';
+            body += 'The weekly CMVP cache update has detected validation issues:\n\n';
+
+            body += '### Errors\n\n';
+            for (const error of results.errors) {
+              body += `- **${error.module}** (${error.file}): ${error.message}\n`;
+            }
+
+            if (results.warnings.length > 0) {
+              body += '\n### Warnings\n\n';
+              for (const warning of results.warnings) {
+                body += `- **${warning.module}**: ${warning.message}\n`;
+              }
+            }
+
+            body += '\n---\n';
+            body += '*This issue was automatically created by the CMVP cache update workflow.*\n';
+            body += `*Validation timestamp: ${results.timestamp}*`;
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[Alert] ${results.invalidModules} Cryptographic Module(s) Require Attention`,
+              body: body,
+              labels: ['compliance', 'crypto-modules', 'automated']
+            });

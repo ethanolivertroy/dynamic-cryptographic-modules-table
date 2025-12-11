@@ -1,0 +1,30 @@
+apiVersion: fedramp20x-poc/v1
+kind: CryptographicModule
+metadata:
+  name: legacy-tls-library
+  uuid: cafebabe-cafe-babe-cafe-babecafebabe
+  labels:
+    data-classification:
+      - DIT
+    environment: production
+    component: legacy-app
+spec:
+  module:
+    name: "Legacy TLS Library"
+    vendor:
+      name: "Legacy Systems Inc"
+    type: software
+    versions:
+      software: "2.1.0"
+  validation:
+    standard: "FIPS 140-2"
+    certificateNumber: 2345
+    securityLevel: 1
+    validationDate: "2018-01-20"
+  usage:
+    dataClassification:
+      - data-in-transit
+    location: "Legacy Application Server"
+    purpose: "TLS encryption for legacy application - migration planned"
+  portProtocolServiceRef:
+    - pps-legacy-001

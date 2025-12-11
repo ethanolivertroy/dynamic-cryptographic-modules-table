@@ -1,0 +1,27 @@
+apiVersion: fedramp20x-poc/v1
+kind: CryptographicModule
+metadata:
+  name: test-revoked-module
+  uuid: deadbeef-dead-beef-dead-beefdeadbeef
+  labels:
+    data-classification:
+      - DAR
+    test: "true"
+spec:
+  module:
+    name: "Old Broken Crypto Module"
+    vendor:
+      name: "Defunct Crypto Corp"
+    type: software
+    versions:
+      software: "1.0.0"
+  validation:
+    standard: "FIPS 140-2"
+    certificateNumber: 1234
+    securityLevel: 1
+    validationDate: "2015-03-15"
+  usage:
+    dataClassification:
+      - data-at-rest
+    location: "Legacy System"
+    purpose: "TEST - This module should FAIL validation (Revoked certificate)"

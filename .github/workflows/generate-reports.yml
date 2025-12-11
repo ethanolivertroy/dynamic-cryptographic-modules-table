@@ -1,0 +1,68 @@
+name: Generate Compliance Reports
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'modules/**/*.yaml'
+      - 'modules/**/*.yml'
+  workflow_dispatch:
+  schedule:
+    # Generate weekly report on Monday at 7 AM UTC
+    - cron: '0 7 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-report:
+    name: Generate Validation Report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Restore CMVP cache
+        uses: actions/cache@v4
+        with:
+          path: cmvp-cache/
+          key: cmvp-cache-${{ hashFiles('cmvp-cache/metadata.json') }}
+          restore-keys: |
+            cmvp-cache-
+
+      - name: Run validation
+        run: |
+          python tools/validate.py \
+            --modules modules/ \
+            --schema schemas/v1/crypto-module.schema.json \
+            --cmvp-cache cmvp-cache/ \
+            --output reports/latest/validation-results.json
+
+      - name: Generate markdown report
+        run: |
+          python tools/report_generator.py \
+            --validation-results reports/latest/validation-results.json \
+            --modules modules/ \
+            --output reports/latest/validation-summary.md
+
+      - name: Archive previous report
+        run: |
+          if [ -f "reports/latest/validation-summary.md" ]; then
+            TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+            mkdir -p reports/archive
+            cp reports/latest/validation-summary.md "reports/archive/validation-summary-${TIMESTAMP}.md" 2>/dev/null || true
+          fi
+
+      - name: Commit reports
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: Update validation report [skip ci]"
+          file_pattern: "reports/**"

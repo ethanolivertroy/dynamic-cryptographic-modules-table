@@ -1,0 +1,50 @@
+{
+  "4282": {
+    "certificateNumber": 4282,
+    "status": "Active",
+    "moduleName": "OpenSSL FIPS Provider",
+    "vendorName": "OpenSSL Software Foundation",
+    "standard": "FIPS 140-3",
+    "securityLevel": 1,
+    "validationDate": "2023-10-03",
+    "sunsetDate": "2028-10-03"
+  },
+  "1234": {
+    "certificateNumber": 1234,
+    "status": "Revoked",
+    "moduleName": "Old Broken Crypto Module",
+    "vendorName": "Defunct Crypto Corp",
+    "standard": "FIPS 140-2",
+    "securityLevel": 1,
+    "validationDate": "2015-03-15",
+    "revocationDate": "2020-06-01",
+    "revocationReason": "Security vulnerability discovered"
+  },
+  "2345": {
+    "certificateNumber": 2345,
+    "status": "Historical",
+    "moduleName": "Legacy TLS Library",
+    "vendorName": "Legacy Systems Inc",
+    "standard": "FIPS 140-2",
+    "securityLevel": 1,
+    "validationDate": "2018-01-20"
+  },
+  "4523": {
+    "certificateNumber": 4523,
+    "status": "Active",
+    "moduleName": "AWS Key Management Service HSM",
+    "vendorName": "Amazon Web Services",
+    "standard": "FIPS 140-3",
+    "securityLevel": 3,
+    "validationDate": "2024-01-15"
+  },
+  "4154": {
+    "certificateNumber": 4154,
+    "status": "Active",
+    "moduleName": "Azure Key Vault Managed HSM",
+    "vendorName": "Microsoft Corporation",
+    "standard": "FIPS 140-3",
+    "securityLevel": 3,
+    "validationDate": "2023-08-22"
+  }
+}

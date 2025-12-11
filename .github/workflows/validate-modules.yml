@@ -1,0 +1,201 @@
+name: Validate Cryptographic Modules
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'modules/**/*.yaml'
+      - 'modules/**/*.yml'
+      - 'schemas/**'
+      - 'tools/validate.py'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'modules/**/*.yaml'
+      - 'modules/**/*.yml'
+      - 'schemas/**'
+  workflow_dispatch:
+  schedule:
+    # Run daily at 6 AM UTC for continuous compliance monitoring
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  lint-yaml:
+    name: Lint YAML Files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run yamllint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: modules/
+          config_file: .yamllint.yaml
+
+  validate-schema:
+    name: Validate Against JSON Schema
+    runs-on: ubuntu-latest
+    needs: lint-yaml
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r tools/requirements.txt
+
+      - name: Validate module files (schema only)
+        run: |
+          python tools/validate.py \
+            --schema schemas/v1/crypto-module.schema.json \
+            --modules modules/ \
+            --output validation-schema.json \
+            --format github-actions
+
+      - name: Upload schema validation results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-schema
+          path: validation-schema.json
+
+  validate-cmvp:
+    name: Validate Against CMVP Cache
+    runs-on: ubuntu-latest
+    needs: validate-schema
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Restore CMVP cache
+        uses: actions/cache@v4
+        with:
+          path: cmvp-cache/
+          key: cmvp-cache-${{ hashFiles('cmvp-cache/metadata.json') }}
+          restore-keys: |
+            cmvp-cache-
+
+      - name: Validate certificates against CMVP
+        id: cmvp-validation
+        run: |
+          python tools/validate.py \
+            --modules modules/ \
+            --schema schemas/v1/crypto-module.schema.json \
+            --cmvp-cache cmvp-cache/ \
+            --output validation-cmvp.json \
+            --format github-actions
+
+      - name: Upload CMVP validation results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-cmvp
+          path: validation-cmvp.json
+
+      - name: Comment on PR with results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            let results;
+            try {
+              results = JSON.parse(fs.readFileSync('validation-cmvp.json', 'utf8'));
+            } catch (e) {
+              console.log('Could not read validation results:', e.message);
+              return;
+            }
+
+            let comment = '## Cryptographic Module Validation Results\n\n';
+
+            // Summary table
+            comment += '| Metric | Count |\n';
+            comment += '|--------|-------|\n';
+            comment += `| Total Modules | ${results.totalModules} |\n`;
+            comment += `| Valid | ${results.validModules} |\n`;
+            comment += `| Invalid | ${results.invalidModules} |\n`;
+            comment += `| Warnings | ${results.warningsCount} |\n\n`;
+
+            if (results.errors && results.errors.length > 0) {
+              comment += '### :x: Validation Errors\n\n';
+              for (const error of results.errors.slice(0, 10)) {
+                comment += `- **${error.module}**: ${error.message}\n`;
+              }
+              if (results.errors.length > 10) {
+                comment += `\n*...and ${results.errors.length - 10} more errors*\n`;
+              }
+            }
+
+            if (results.warnings && results.warnings.length > 0) {
+              comment += '\n### :warning: Warnings\n\n';
+              for (const warning of results.warnings.slice(0, 10)) {
+                comment += `- **${warning.module}**: ${warning.message}\n`;
+              }
+              if (results.warnings.length > 10) {
+                comment += `\n*...and ${results.warnings.length - 10} more warnings*\n`;
+              }
+            }
+
+            if (results.invalidModules === 0) {
+              comment += '\n### :white_check_mark: All modules validated successfully!\n';
+            }
+
+            comment += `\n---\n*Validated at ${results.timestamp}*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  generate-json:
+    name: Generate JSON Files
+    runs-on: ubuntu-latest
+    needs: validate-cmvp
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Generate JSON from YAML
+        run: |
+          python tools/convert.py modules/ --merge -o modules/_generated/all-modules.json
+          python tools/convert.py modules/data-in-transit -f json -o modules/_generated/data-in-transit
+          python tools/convert.py modules/data-at-rest -f json -o modules/_generated/data-at-rest
+          python tools/convert.py modules/data-in-use -f json -o modules/_generated/data-in-use
+
+      - name: Commit generated files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Generate JSON files from YAML [skip ci]"
+          file_pattern: "modules/_generated/**"

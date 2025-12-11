@@ -1,0 +1,56 @@
+apiVersion: fedramp20x-poc/v1
+kind: CryptographicModule
+metadata:
+  name: azure-keyvault-mhsm
+  uuid: 3b8e5f21-9c74-4d12-b890-6a7e2c4d8f13
+  labels:
+    data-classification:
+      - DAR
+      - DIT
+    environment: production
+    component: secrets-management
+  annotations:
+    ssp-reference: "SC-12, SC-13, SC-28"
+
+spec:
+  module:
+    name: "Marvell LiquidSecurity HSM Adapter"
+    vendor:
+      name: "Marvell Technology Group Ltd."
+      url: "https://www.marvell.com"
+    type: hardware
+    embodiment: multi-chip-embedded
+    versions:
+      firmware: "3.6.1"
+      hardware: "2.0"
+    description: "HSM backing Azure Key Vault Managed HSM for FIPS 140-3 Level 3 key protection"
+
+  validation:
+    standard: "FIPS 140-3"
+    certificateNumber: 4154
+    securityLevel: 3
+    validationDate: "2023-06-22"
+    sunsetDate: "2028-03-22"
+    cmvpUrl: "https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4154"
+    algorithms:
+      - AES
+      - RSA
+      - ECDSA
+      - ECDH
+      - SHA-2
+      - SHA-3
+      - HMAC
+      - DRBG
+
+  usage:
+    dataClassification:
+      - data-at-rest
+      - data-in-transit
+    location: "Azure Cloud Infrastructure - Key Vault Managed HSM"
+    purpose: "Customer-managed encryption keys for Azure services"
+    inherited: true
+    inheritedFrom: "FR0987654321"
+
+status:
+  cmvpStatus: Active
+  complianceStatus: compliant

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fedramp20x-poc/crypto-modules/schemas/v1/cmvp-cache.schema.json",
+  "title": "CMVP Cache Entry",
+  "description": "Schema for cached NIST CMVP certificate data",
+  "type": "object",
+  "required": ["certificateNumber", "moduleName", "status"],
+  "properties": {
+    "certificateNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "CMVP certificate number"
+    },
+    "moduleName": {
+      "type": "string",
+      "description": "Official module name from CMVP"
+    },
+    "vendor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Vendor organization name"
+        },
+        "country": {
+          "type": "string",
+          "description": "Vendor country"
+        }
+      },
+      "required": ["name"]
+    },
+    "standard": {
+      "enum": ["FIPS 140-1", "FIPS 140-2", "FIPS 140-3"],
+      "description": "FIPS standard version"
+    },
+    "status": {
+      "enum": ["Active", "Historical", "Revoked"],
+      "description": "Current CMVP status"
+    },
+    "moduleType": {
+      "enum": ["Software", "Hardware", "Firmware", "Hybrid"],
+      "description": "Module type classification"
+    },
+    "embodiment": {
+      "type": "string",
+      "description": "Physical embodiment type"
+    },
+    "securityLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Overall security level"
+    },
+    "validationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Initial validation date"
+    },
+    "sunsetDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Module sunset date"
+    },
+    "algorithms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Validated algorithms"
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Validation caveats"
+    },
+    "versions": {
+      "type": "object",
+      "properties": {
+        "software": {
+          "type": "string"
+        },
+        "firmware": {
+          "type": "string"
+        },
+        "hardware": {
+          "type": "string"
+        }
+      }
+    },
+    "testedConfigurations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tested configurations"
+    },
+    "lastScraped": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this data was last scraped from CMVP"
+    }
+  }
+}
