@@ -1,18 +1,17 @@
 {
-  "schemaVersion": "1.0.0",
-  "lastUpdated": "2025-12-09T08:00:00Z",
-  "lastUpdateStatus": "test_data",
-  "certificateRange": {
-    "min": 1234,
-    "max": 4523
-  },
-  "statistics": {
-    "totalCertificates": 5,
-    "activeCertificates": 3,
-    "historicalCertificates": 1,
-    "revokedCertificates": 1
-  },
+  "lastUpdated": "2025-12-14T01:08:14.760439Z",
   "source": "https://csrc.nist.gov/projects/cryptographic-module-validation-program",
-  "updateSchedule": "weekly",
-  "notes": "Test data for POC demonstration"
+  "rangesCached": [
+    {
+      "start": 4000,
+      "end": 5999,
+      "file": "certificates/4000-5999.json"
+    }
+  ],
+  "statusCounts": {
+    "Active": 3,
+    "Historical": 1,
+    "Revoked": 1
+  },
+  "totalCertificates": 1112
 }
