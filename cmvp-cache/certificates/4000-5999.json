@@ -12593,5 +12593,40 @@
     "certificateNumber": 5107,
     "lastScraped": "2025-12-14T00:38:28.704211Z",
     "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5108": {
+    "certificateNumber": 5108,
+    "lastScraped": "2025-12-21T00:01:27.043539Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5109": {
+    "certificateNumber": 5109,
+    "lastScraped": "2025-12-21T00:01:29.057682Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5110": {
+    "certificateNumber": 5110,
+    "lastScraped": "2025-12-21T00:01:31.053362Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5111": {
+    "certificateNumber": 5111,
+    "lastScraped": "2025-12-21T00:01:33.090314Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5112": {
+    "certificateNumber": 5112,
+    "lastScraped": "2025-12-21T00:01:35.071403Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5113": {
+    "certificateNumber": 5113,
+    "lastScraped": "2025-12-21T00:01:37.074201Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5114": {
+    "certificateNumber": 5114,
+    "lastScraped": "2025-12-21T00:01:39.053926Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
