@@ -12628,5 +12628,33 @@
     "certificateNumber": 5114,
     "lastScraped": "2025-12-21T00:01:39.053926Z",
     "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5115": {
+    "certificateNumber": 5115,
+    "lastScraped": "2026-01-11T00:01:34.463531Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5116": {
+    "certificateNumber": 5116,
+    "lastScraped": "2026-01-11T00:01:36.937690Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5117": {
+    "certificateNumber": 5117,
+    "lastScraped": "2026-01-11T00:01:38.745122Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5118": {
+    "certificateNumber": 5118,
+    "lastScraped": "2026-01-11T00:01:40.687468Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "RSA"
+    ]
+  },
+  "5119": {
+    "certificateNumber": 5119,
+    "lastScraped": "2026-01-11T00:01:42.499144Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
