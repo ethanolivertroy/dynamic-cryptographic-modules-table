@@ -12907,5 +12907,30 @@
       "RSA",
       "SHA-2"
     ]
+  },
+  "5141": {
+    "certificateNumber": 5141,
+    "lastScraped": "2026-01-25T00:01:24.440930Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5142": {
+    "certificateNumber": 5142,
+    "lastScraped": "2026-01-25T00:01:26.478602Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "AES",
+      "DRBG",
+      "ECDSA",
+      "HMAC",
+      "RSA",
+      "SHA-1",
+      "SHA-2",
+      "SHA-3"
+    ]
+  },
+  "5143": {
+    "certificateNumber": 5143,
+    "lastScraped": "2026-01-25T00:01:28.539227Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
