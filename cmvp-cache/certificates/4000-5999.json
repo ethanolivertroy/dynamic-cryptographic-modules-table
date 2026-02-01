@@ -12932,5 +12932,55 @@
     "certificateNumber": 5143,
     "lastScraped": "2026-01-25T00:01:28.539227Z",
     "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5144": {
+    "certificateNumber": 5144,
+    "lastScraped": "2026-02-01T00:01:33.162976Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5145": {
+    "certificateNumber": 5145,
+    "lastScraped": "2026-02-01T00:01:35.182189Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5146": {
+    "certificateNumber": 5146,
+    "lastScraped": "2026-02-01T00:01:37.152909Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5147": {
+    "certificateNumber": 5147,
+    "lastScraped": "2026-02-01T00:01:39.165946Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5148": {
+    "certificateNumber": 5148,
+    "lastScraped": "2026-02-01T00:01:41.206884Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "AES",
+      "DRBG",
+      "ECDSA",
+      "HMAC",
+      "RSA",
+      "SHA-1",
+      "SHA-2",
+      "SHA-3"
+    ]
+  },
+  "5149": {
+    "certificateNumber": 5149,
+    "lastScraped": "2026-02-01T00:01:43.157895Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5150": {
+    "certificateNumber": 5150,
+    "lastScraped": "2026-02-01T00:01:45.157118Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5151": {
+    "certificateNumber": 5151,
+    "lastScraped": "2026-02-01T00:01:47.149687Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
