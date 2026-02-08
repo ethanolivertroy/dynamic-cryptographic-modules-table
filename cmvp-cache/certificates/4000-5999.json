@@ -12982,5 +12982,16 @@
     "certificateNumber": 5151,
     "lastScraped": "2026-02-01T00:01:47.149687Z",
     "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5152": {
+    "certificateNumber": 5152,
+    "lastScraped": "2026-02-08T00:04:48.253425Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "AES",
+      "DRBG",
+      "HMAC",
+      "RSA"
+    ]
   }
 }
