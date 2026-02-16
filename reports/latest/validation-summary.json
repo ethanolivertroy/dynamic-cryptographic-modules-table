@@ -1,40 +1,29 @@
 {
-  "timestamp": "2026-02-09T07:29:25.256306Z",
+  "timestamp": "2026-02-16T07:28:38.890599Z",
   "summary": {
     "total": 3,
-    "compliant": 2,
-    "actionRequired": 1,
+    "compliant": 0,
+    "actionRequired": 3,
     "nonCompliant": 0,
-    "warnings": 2
+    "warnings": 4
   },
   "modules": {
-    "compliant": [
-      {
-        "name": "aws-kms-hsm",
-        "certificateNumber": 4523,
-        "cmvpStatus": "Active",
-        "standard": "FIPS 140-3",
-        "dataClassification": [
-          "data-at-rest"
-        ],
-        "location": "AWS Cloud Infrastructure - Key Management",
-        "errors": [],
-        "warnings": []
-      },
+    "compliant": [],
+    "action_required": [
       {
         "name": "openssl-fips-provider",
         "certificateNumber": 4282,
-        "cmvpStatus": "Active",
+        "cmvpStatus": null,
         "standard": "FIPS 140-3",
         "dataClassification": [
           "data-in-transit"
         ],
         "location": "Application Server - TLS Termination",
         "errors": [],
-        "warnings": []
-      }
-    ],
-    "action_required": [
+        "warnings": [
+          "Module name may not match CMVP record: declared='OpenSSL FIPS Provider', CMVP='Cryptographic Module Validation Program CMVP'"
+        ]
+      },
       {
         "name": "legacy-tls-library",
         "certificateNumber": 2345,
@@ -48,6 +37,20 @@
         "warnings": [
           "Certificate #2345 is HISTORICAL. Document in POA&M and plan for replacement per FedRAMP policy.",
           "FIPS 140-2 modules will not be acceptable after September 21, 2026. Consider planning migration to FIPS 140-3."
+        ]
+      },
+      {
+        "name": "aws-kms-hsm",
+        "certificateNumber": 4523,
+        "cmvpStatus": null,
+        "standard": "FIPS 140-3",
+        "dataClassification": [
+          "data-at-rest"
+        ],
+        "location": "AWS Cloud Infrastructure - Key Management",
+        "errors": [],
+        "warnings": [
+          "Module name may not match CMVP record: declared='AWS Key Management Service HSM', CMVP='Cryptographic Module Validation Program CMVP'"
         ]
       }
     ],
