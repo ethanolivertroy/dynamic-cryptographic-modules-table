@@ -13052,5 +13052,20 @@
     "algorithms": [
       "RSA"
     ]
+  },
+  "5162": {
+    "certificateNumber": 5162,
+    "lastScraped": "2026-02-22T00:01:19.533985Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5163": {
+    "certificateNumber": 5163,
+    "lastScraped": "2026-02-22T00:01:21.576656Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5164": {
+    "certificateNumber": 5164,
+    "lastScraped": "2026-02-22T00:01:23.604621Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
