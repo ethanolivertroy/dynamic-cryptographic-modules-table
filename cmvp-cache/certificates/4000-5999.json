@@ -13114,5 +13114,133 @@
       "SHA-3",
       "Triple-DES"
     ]
+  },
+  "5174": {
+    "certificateNumber": 5174,
+    "lastScraped": "2026-03-15T00:03:26.628157Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5175": {
+    "certificateNumber": 5175,
+    "lastScraped": "2026-03-15T00:03:28.615329Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5176": {
+    "certificateNumber": 5176,
+    "lastScraped": "2026-03-15T00:03:30.625757Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5177": {
+    "certificateNumber": 5177,
+    "lastScraped": "2026-03-15T00:03:32.645987Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5178": {
+    "certificateNumber": 5178,
+    "lastScraped": "2026-03-15T00:03:34.637970Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "RSA"
+    ]
+  },
+  "5179": {
+    "certificateNumber": 5179,
+    "lastScraped": "2026-03-15T00:03:36.679116Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5180": {
+    "certificateNumber": 5180,
+    "lastScraped": "2026-03-15T00:03:38.608777Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5181": {
+    "certificateNumber": 5181,
+    "lastScraped": "2026-03-15T00:03:40.627136Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5182": {
+    "certificateNumber": 5182,
+    "lastScraped": "2026-03-15T00:03:42.624136Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5183": {
+    "certificateNumber": 5183,
+    "lastScraped": "2026-03-15T00:03:44.649335Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5184": {
+    "certificateNumber": 5184,
+    "lastScraped": "2026-03-15T00:03:46.609771Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5185": {
+    "certificateNumber": 5185,
+    "lastScraped": "2026-03-15T00:03:48.702410Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5186": {
+    "certificateNumber": 5186,
+    "lastScraped": "2026-03-15T00:03:50.628899Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5187": {
+    "certificateNumber": 5187,
+    "lastScraped": "2026-03-15T00:03:52.657399Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5188": {
+    "certificateNumber": 5188,
+    "lastScraped": "2026-03-15T00:03:54.612125Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5189": {
+    "certificateNumber": 5189,
+    "lastScraped": "2026-03-15T00:03:56.606862Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5190": {
+    "certificateNumber": 5190,
+    "lastScraped": "2026-03-15T00:03:58.716364Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5191": {
+    "certificateNumber": 5191,
+    "lastScraped": "2026-03-15T00:04:00.802668Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5192": {
+    "certificateNumber": 5192,
+    "lastScraped": "2026-03-15T00:04:02.727048Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5193": {
+    "certificateNumber": 5193,
+    "lastScraped": "2026-03-15T00:04:04.678533Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5194": {
+    "certificateNumber": 5194,
+    "lastScraped": "2026-03-15T00:04:06.759457Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5195": {
+    "certificateNumber": 5195,
+    "lastScraped": "2026-03-15T00:04:08.658464Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5196": {
+    "certificateNumber": 5196,
+    "lastScraped": "2026-03-15T00:04:10.652557Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5197": {
+    "certificateNumber": 5197,
+    "lastScraped": "2026-03-15T00:04:12.671970Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5198": {
+    "certificateNumber": 5198,
+    "lastScraped": "2026-03-15T00:04:14.864801Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }
