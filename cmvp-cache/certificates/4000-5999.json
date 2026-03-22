@@ -13242,5 +13242,43 @@
     "certificateNumber": 5198,
     "lastScraped": "2026-03-15T00:04:14.864801Z",
     "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5165": {
+    "certificateNumber": 5165,
+    "lastScraped": "2026-03-22T00:01:44.579204Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP",
+    "algorithms": [
+      "AES"
+    ]
+  },
+  "5166": {
+    "certificateNumber": 5166,
+    "lastScraped": "2026-03-22T00:01:46.392299Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5199": {
+    "certificateNumber": 5199,
+    "lastScraped": "2026-03-22T00:01:48.524006Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5200": {
+    "certificateNumber": 5200,
+    "lastScraped": "2026-03-22T00:01:50.657360Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5201": {
+    "certificateNumber": 5201,
+    "lastScraped": "2026-03-22T00:01:52.504848Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5202": {
+    "certificateNumber": 5202,
+    "lastScraped": "2026-03-22T00:01:54.476420Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
+  },
+  "5203": {
+    "certificateNumber": 5203,
+    "lastScraped": "2026-03-22T00:01:56.558432Z",
+    "moduleName": "Cryptographic Module Validation Program CMVP"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-15T00:30:58.528526Z",
+  "lastUpdated": "2026-03-22T00:28:30.347155Z",
   "source": "https://csrc.nist.gov/projects/cryptographic-module-validation-program",
   "rangesCached": [
     {
@@ -13,5 +13,5 @@
     "Historical": 1,
     "Revoked": 1
   },
-  "totalCertificates": 1201
+  "totalCertificates": 1208
 }
