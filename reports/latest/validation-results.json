@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-30T07:37:56.524439Z",
+  "timestamp": "2026-04-06T07:37:52.837265Z",
   "totalModules": 3,
   "validModules": 3,
   "invalidModules": 0,
@@ -14,7 +14,7 @@
     {
       "module": "legacy-tls-library",
       "file": "modules/data-in-transit/legacy-tls-library.yaml",
-      "message": "FIPS 140-2 acceptance ends in 174 days (September 21, 2026). Plan migration to FIPS 140-3."
+      "message": "FIPS 140-2 acceptance ends in 167 days (September 21, 2026). Plan migration to FIPS 140-3."
     }
   ],
   "results": [
@@ -45,7 +45,7 @@
       "errors": [],
       "warnings": [
         "Certificate #2345 is HISTORICAL. Document in POA&M and plan for replacement per FedRAMP policy.",
-        "FIPS 140-2 acceptance ends in 174 days (September 21, 2026). Plan migration to FIPS 140-3."
+        "FIPS 140-2 acceptance ends in 167 days (September 21, 2026). Plan migration to FIPS 140-3."
       ]
     }
   ]
